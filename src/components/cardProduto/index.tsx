@@ -3,8 +3,6 @@ import {
   ButtonComprarStyled,
   InfoProdutoContainer,
   NameAndPriceContainer,
-  NameProdutoStyled,
-  PriceProdutoSytyled,
   ProdutoContainer,
 } from "./style";
 
@@ -19,8 +17,8 @@ export default function CardProduto({ produto, setCountItens }: Props) {
           height={120}
         />
         <NameAndPriceContainer>
-          <NameProdutoStyled>{produto.name}</NameProdutoStyled>
-          <PriceProdutoSytyled>{produto.price}</PriceProdutoSytyled>
+          <span>{produto.name}</span>
+          <span>{produto.price}</span>
         </NameAndPriceContainer>
         <span>{produto.description}</span>
       </InfoProdutoContainer>

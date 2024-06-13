@@ -29,20 +29,19 @@ export const NameAndPriceContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 12px 0;
-`;
 
-export const NameProdutoStyled = styled.span`
-  width: 80px;
-  font-weight: 600;
-`;
-
-export const PriceProdutoSytyled = styled.span`
-  padding: 8px;
-  border-radius: 8px;
-  color: white;
-  background-color: #373737;
-  font-weight: 700;
-  text-align: center;
+  span:nth-child(1) {
+    width: 80px;
+    font-weight: 600;
+  }
+  span:nth-child(2) {
+    padding: 8px;
+    border-radius: 8px;
+    color: white;
+    background-color: #373737;
+    font-weight: 700;
+    text-align: center;
+  }
 `;
 
 export const ButtonComprarStyled = styled.button`
@@ -58,4 +57,8 @@ export const ButtonComprarStyled = styled.button`
   text-transform: uppercase;
   font-size: 18px;
   cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
 `;
