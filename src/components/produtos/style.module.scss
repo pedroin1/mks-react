@@ -1,0 +1,16 @@
+.main_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.grid_produtos {
+  margin: 0 auto;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(4, 320px);
+  grid-template-rows: repeat(2, 400px);
+  row-gap: 12px;
+}

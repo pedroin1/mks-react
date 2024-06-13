@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./App.scss";
+import HeaderComponent from "./components/header";
+import FooterComponent from "./components/footer";
+import ProdutosComponent from "./components/produtos";
+import { useState } from "react";
 
-function App() {
+export default function App() {
+  const [countItens, setCountItens] = useState<number>(0);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <HeaderComponent countItens={countItens} />
+      <Routes>
+        <Route
+          path="/produtos"
+          element={<ProdutosComponent setCountItens={setCountItens} />}
+        />
+      </Routes>
+      <FooterComponent />
+    </BrowserRouter>
   );
 }
-
-export default App;
