@@ -1,13 +1,15 @@
-.header_container {
+import styled from "styled-components";
+
+export const HeaderContainer = styled.header`
   background-color: #0f52ba;
   width: 100%;
   height: 101px;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-}
+`;
 
-.title_container {
+export const TitleContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: baseline;
@@ -30,9 +32,9 @@
     font-weight: 300;
     font-size: 20px;
   }
-}
+`;
 
-.icon_container {
+export const IconContainer = styled.div`
   margin-right: 100px;
   padding: 12px 18px;
   background-color: white;
@@ -44,4 +46,4 @@
   P {
     font-weight: bold;
   }
-}
+`;

@@ -1,18 +1,18 @@
 import IconShop from "../../icons/iconShop";
-import styles from "./style.module.scss";
+import { HeaderContainer, IconContainer, TitleContainer } from "./style";
 
 export default function HeaderComponent({ countItens }: Props) {
   return (
-    <header className={styles.header_container}>
-      <div className={styles.title_container}>
+    <HeaderContainer>
+      <TitleContainer>
         <h1>MKS</h1>
         <span>Sistemas</span>
-      </div>
-      <div className={styles.icon_container}>
+      </TitleContainer>
+      <IconContainer>
         <IconShop />
         <p>{countItens}</p>
-      </div>
-    </header>
+      </IconContainer>
+    </HeaderContainer>
   );
 }
 

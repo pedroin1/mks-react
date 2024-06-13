@@ -1,14 +1,16 @@
-.produto_container {
+import styled from "styled-components";
+
+export const ProdutoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 300px;
-  height: 99%;
+  height: 95%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 8px;
-}
+`;
 
-.info_produto {
+export const InfoProdutoContainer = styled.div`
   padding: 24px 12px;
   display: flex;
   justify-content: center;
@@ -18,32 +20,32 @@
   img {
     background-color: red;
   }
-}
+`;
 
-.name_price_wrapper {
+export const NameAndPriceContainer = styled.div`
   display: flex;
   flex: 1;
   width: 100%;
   justify-content: space-between;
   align-items: center;
   margin: 12px 0;
-}
+`;
 
-.name {
+export const NameProdutoStyled = styled.span`
   width: 80px;
   font-weight: 600;
-}
+`;
 
-.price {
+export const PriceProdutoSytyled = styled.span`
   padding: 8px;
   border-radius: 8px;
   color: white;
   background-color: #373737;
   font-weight: 700;
   text-align: center;
-}
+`;
 
-.button_comprar {
+export const ButtonComprarStyled = styled.button`
   background-color: #0f52ba;
   border: none;
   outline: none;
@@ -56,4 +58,4 @@
   text-transform: uppercase;
   font-size: 18px;
   cursor: pointer;
-}
+`;

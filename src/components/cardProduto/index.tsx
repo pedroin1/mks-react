@@ -1,30 +1,33 @@
-import IconComprar from "../../icons/iconComprar";
-import { ProdutoIO } from "../produtos";
-import styles from "./style.module.scss";
+import { ProdutoIO } from "../../types/types";
+import {
+  ButtonComprarStyled,
+  InfoProdutoContainer,
+  NameAndPriceContainer,
+  NameProdutoStyled,
+  PriceProdutoSytyled,
+  ProdutoContainer,
+} from "./style";
 
 export default function CardProduto({ produto, setCountItens }: Props) {
   return (
-    <div className={styles.produto_container}>
-      <div className={styles.info_produto}>
+    <ProdutoContainer>
+      <InfoProdutoContainer>
         <img
           src={produto.photo}
           alt={`foto_produto`}
           width={120}
           height={120}
         />
-        <div className={styles.name_price_wrapper}>
-          <span className={styles.name}>{produto.name}</span>
-          <span className={styles.price}>{produto.price}</span>
-        </div>
+        <NameAndPriceContainer>
+          <NameProdutoStyled>{produto.name}</NameProdutoStyled>
+          <PriceProdutoSytyled>{produto.price}</PriceProdutoSytyled>
+        </NameAndPriceContainer>
         <span>{produto.description}</span>
-      </div>
-      <button
-        className={styles.button_comprar}
-        onClick={() => setCountItens((prev) => prev + 1)}
-      >
+      </InfoProdutoContainer>
+      <ButtonComprarStyled onClick={() => setCountItens((prev) => prev + 1)}>
         Comprar
-      </button>
-    </div>
+      </ButtonComprarStyled>
+    </ProdutoContainer>
   );
 }
 

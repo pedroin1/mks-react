@@ -1,9 +1,9 @@
-import styles from "./style.module.scss";
+import { FooterContainer } from "./style";
 
 export default function FooterComponent() {
   return (
-    <footer className={styles.footer_container}>
+    <FooterContainer>
       <span>MKS sistemas © Todos os direitos reservados</span>
-    </footer>
+    </FooterContainer>
   );
 }
