@@ -16,10 +16,6 @@ export const InfoProdutoContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
-  img {
-    background-color: red;
-  }
 `;
 
 export const NameAndPriceContainer = styled.div`
@@ -38,21 +34,21 @@ export const NameAndPriceContainer = styled.div`
     padding: 8px;
     border-radius: 8px;
     color: white;
-    background-color: #373737;
+    background-color: ${(props) => props.theme.secondaryColor};
     font-weight: 700;
     text-align: center;
   }
 `;
 
 export const ButtonComprarStyled = styled.button`
-  background-color: #0f52ba;
+  background-color: ${(props) => props.theme.primaryColor};
   border: none;
   outline: none;
   padding: 12px 24px;
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
   width: 100%;
-  color: white;
+  color: ${(props) => props.theme.white};
   font-weight: bold;
   text-transform: uppercase;
   font-size: 18px;

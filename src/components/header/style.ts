@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
-  background-color: #0f52ba;
+  background-color: ${(props) => props.theme.primaryColor};
   width: 100%;
   height: 101px;
   display: flex;
@@ -17,7 +17,7 @@ export const TitleContainer = styled.div`
 
   h1,
   span {
-    color: white;
+    color: ${(props) => props.theme.white};
     margin-top: 36px;
   }
 
