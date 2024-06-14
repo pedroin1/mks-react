@@ -3,7 +3,7 @@ import CardProduto from "../../components/cardProduto";
 import { ProdutoIO, ProdutoResponse } from "../../types/types";
 import { GridProdutos, MainContainer } from "./style";
 
-export default function ProdutosComponent({ setCountItens }: Props) {
+export default function ProdutosComponent({ setProdutosList }: Props) {
   const [produtos, setProdutos] = useState<ProdutoIO[]>([]);
   const [error, setError] = useState<string>("");
 
@@ -34,7 +34,7 @@ export default function ProdutosComponent({ setCountItens }: Props) {
             <CardProduto
               key={produto.id}
               produto={produto}
-              setCountItens={setCountItens}
+              setProdutosList={setProdutosList}
             />
           ))
         )}
@@ -44,5 +44,5 @@ export default function ProdutosComponent({ setCountItens }: Props) {
 }
 
 type Props = {
-  setCountItens: React.Dispatch<React.SetStateAction<number>>;
+  setProdutosList: React.Dispatch<React.SetStateAction<ProdutoIO[]>>;
 };

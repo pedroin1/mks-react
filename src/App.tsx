@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 import FooterComponent from "./components/footer";
 import HeaderComponent from "./components/header";
 import "./global";
 import PageNotFoundError from "./pages/notFound/page";
 import ProdutosComponent from "./pages/produtos/page";
-import { ThemeProvider } from "styled-components";
+import { ProdutoIO } from "./types/types";
 
 const theme = {
   white: "#ffffff",
@@ -16,16 +17,16 @@ const theme = {
 };
 
 export default function App() {
-  const [countItens, setCountItens] = useState<number>(0);
+  const [produtosList, setProdutosList] = useState<ProdutoIO[]>([]);
 
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <HeaderComponent countItens={countItens} />
+        <HeaderComponent produtosList={produtosList} />
         <Routes>
           <Route
             path="/produtos"
-            element={<ProdutosComponent setCountItens={setCountItens} />}
+            element={<ProdutosComponent setProdutosList={setProdutosList} />}
           />
           <Route path="/" element={<Navigate to="/produtos" replace />} />
           <Route path="/*" element={<PageNotFoundError />} />

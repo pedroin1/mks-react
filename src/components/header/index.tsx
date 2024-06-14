@@ -1,9 +1,10 @@
 import { useState } from "react";
 import IconShop from "../../icons/iconShop";
-import { HeaderContainer, IconContainer, TitleContainer } from "./style";
+import { ProdutoIO } from "../../types/types";
 import MenuLateral from "../menuLateral";
+import { HeaderContainer, IconContainer, TitleContainer } from "./style";
 
-export default function HeaderComponent({ countItens }: Props) {
+export default function HeaderComponent({ produtosList }: Props) {
   const [showLateralMenu, setShowLateralMenu] = useState<boolean>(false);
 
   return (
@@ -14,13 +15,14 @@ export default function HeaderComponent({ countItens }: Props) {
       </TitleContainer>
       <IconContainer onClick={() => setShowLateralMenu(true)}>
         <IconShop />
-        <p>{countItens}</p>
+        <p>{produtosList.length}</p>
       </IconContainer>
 
       {showLateralMenu && (
         <MenuLateral
           showLateralMenu={showLateralMenu}
           setShowLateralMenu={setShowLateralMenu}
+          produtosList={produtosList}
         />
       )}
     </HeaderContainer>
@@ -28,5 +30,5 @@ export default function HeaderComponent({ countItens }: Props) {
 }
 
 type Props = {
-  countItens: number;
+  produtosList: ProdutoIO[];
 };

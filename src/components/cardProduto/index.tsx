@@ -6,7 +6,11 @@ import {
   ProdutoContainer,
 } from "./style";
 
-export default function CardProduto({ produto, setCountItens }: Props) {
+export default function CardProduto({ produto, setProdutosList }: Props) {
+  const handleClickAddProdutoOnList = (produto: ProdutoIO) => {
+    setProdutosList((prev) => [...prev, produto]);
+  };
+
   return (
     <ProdutoContainer>
       <InfoProdutoContainer>
@@ -22,7 +26,7 @@ export default function CardProduto({ produto, setCountItens }: Props) {
         </NameAndPriceContainer>
         <span>{produto.description}</span>
       </InfoProdutoContainer>
-      <ButtonComprarStyled onClick={() => setCountItens((prev) => prev + 1)}>
+      <ButtonComprarStyled onClick={() => handleClickAddProdutoOnList(produto)}>
         Comprar
       </ButtonComprarStyled>
     </ProdutoContainer>
@@ -31,5 +35,5 @@ export default function CardProduto({ produto, setCountItens }: Props) {
 
 type Props = {
   produto: ProdutoIO;
-  setCountItens: React.Dispatch<React.SetStateAction<number>>;
+  setProdutosList: React.Dispatch<React.SetStateAction<ProdutoIO[]>>;
 };

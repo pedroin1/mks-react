@@ -1,12 +1,17 @@
+import { ProdutoIO } from "../../types/types";
 import {
   AsideContent,
   ButtonComprarCarrinho,
+  EndBuyContainer,
+  ListaProdutosContainer,
+  ProdutoCompradoContainer,
   TitleAsideContainer,
 } from "./style";
 
 export default function MenuLateral({
   showLateralMenu,
   setShowLateralMenu,
+  produtosList,
 }: Props) {
   return (
     <AsideContent stillOpen={showLateralMenu}>
@@ -15,10 +20,24 @@ export default function MenuLateral({
         <button onClick={() => setShowLateralMenu(false)}>X</button>
       </TitleAsideContainer>
 
-      <div>
-        <span>Total: r$ 2500</span>
-      </div>
-      <ButtonComprarCarrinho>Finalizar compra</ButtonComprarCarrinho>
+      <ListaProdutosContainer enableOverflow={produtosList.length > 6}>
+        {produtosList.map((produto) => (
+          <ProdutoCompradoContainer key={produto.id}>
+            <img src={produto.photo} alt={`foto_${produto.name}`} />
+            <span>{produto.name}</span>
+            <span>2</span>
+            <div className="price">R$ {produto.price}</div>
+          </ProdutoCompradoContainer>
+        ))}
+      </ListaProdutosContainer>
+
+      <EndBuyContainer>
+        <div className="total-wrapper">
+          <span>Total:</span>
+          <span>R$ 2500</span>
+        </div>
+        <ButtonComprarCarrinho>Finalizar compra</ButtonComprarCarrinho>
+      </EndBuyContainer>
     </AsideContent>
   );
 }
@@ -26,4 +45,5 @@ export default function MenuLateral({
 type Props = {
   showLateralMenu: boolean;
   setShowLateralMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  produtosList: ProdutoIO[];
 };
