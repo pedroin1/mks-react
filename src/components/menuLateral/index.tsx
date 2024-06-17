@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ProdutoIO } from "../../types/types";
+import { ProdutoCompleto } from "../../types/types";
 import {
   AsideContent,
   ButtonComprarCarrinho,
@@ -16,33 +16,71 @@ export default function MenuLateral({
   setProdutosList,
 }: Props) {
   const [valorTotalItens, setValorTotalItens] = useState<number>(0);
+  const [closeMenu, setCloseMenu] = useState<boolean>(false);
+
+  const handleClickFinalizarCompra = () => {
+    setProdutosList([]);
+    setShowLateralMenu(false);
+    setTimeout(() => {
+      alert("Compra Finalizada!");
+    }, 300);
+  };
+
+  const handleClickCloseLateralMenu = () => {
+    setCloseMenu(true);
+    setTimeout(() => {
+      setShowLateralMenu(false);
+    }, 200);
+  };
 
   const handleRemoveProdutoFromList = (produtoId: number) => {
-    setProdutosList(produtosList.filter((produto) => produto.id !== produtoId));
+    let indexToRemove = produtosList.findIndex(
+      ({ produto }) => produto.id === produtoId
+    );
+
+    let objectFromIndex = produtosList[indexToRemove];
+
+    if (objectFromIndex.quantidade === 1) {
+      setProdutosList(produtosList.filter((obj) => obj !== objectFromIndex));
+    } else {
+      const updatedList = produtosList.map((obj, index) =>
+        index === indexToRemove
+          ? { ...obj, quantidade: obj.quantidade - 1 }
+          : obj
+      );
+
+      setProdutosList(updatedList);
+    }
+  };
+
+  const calculateTotalValueOfItems = (produtosList: ProdutoCompleto[]) => {
+    setValorTotalItens(
+      produtosList.reduce(
+        (accumulator, { produto, quantidade }) =>
+          accumulator + produto.price * quantidade,
+        0
+      )
+    );
   };
 
   useEffect(() => {
-    let total = produtosList.reduce(
-      (accumulator, current) => accumulator + Number(current.price),
-      0
-    );
-    setValorTotalItens(total);
+    calculateTotalValueOfItems(produtosList);
   }, [produtosList]);
 
   return (
-    <AsideContent stillOpen={showLateralMenu}>
+    <AsideContent showMenu={showLateralMenu} closeMenu={closeMenu}>
       <TitleAsideContainer>
         <span>Carrinho de compas</span>
-        <button onClick={() => setShowLateralMenu(false)}>X</button>
+        <button onClick={handleClickCloseLateralMenu}>X</button>
       </TitleAsideContainer>
 
       <ListaProdutosContainer enableOverflow={produtosList.length > 6}>
-        {produtosList.map((produto) => (
+        {produtosList.map(({ produto, quantidade }) => (
           <ProdutoCompradoContainer key={produto.id}>
             <img src={produto.photo} alt={`foto_${produto.name}`} />
             <span>{produto.name}</span>
-            <span>2</span>
-            <div className="price">R$ {produto.price}</div>
+            <span>{quantidade}</span>
+            <div className="price">R$ {quantidade * produto.price}</div>
             <button onClick={() => handleRemoveProdutoFromList(produto.id)}>
               x
             </button>
@@ -55,7 +93,9 @@ export default function MenuLateral({
           <span>Total:</span>
           <span>R$ {valorTotalItens}</span>
         </div>
-        <ButtonComprarCarrinho>Finalizar compra</ButtonComprarCarrinho>
+        <ButtonComprarCarrinho onClick={handleClickFinalizarCompra}>
+          Finalizar compra
+        </ButtonComprarCarrinho>
       </EndBuyContainer>
     </AsideContent>
   );
@@ -64,6 +104,6 @@ export default function MenuLateral({
 type Props = {
   showLateralMenu: boolean;
   setShowLateralMenu: React.Dispatch<React.SetStateAction<boolean>>;
-  produtosList: ProdutoIO[];
-  setProdutosList: React.Dispatch<React.SetStateAction<ProdutoIO[]>>;
+  produtosList: ProdutoCompleto[];
+  setProdutosList: React.Dispatch<React.SetStateAction<ProdutoCompleto[]>>;
 };

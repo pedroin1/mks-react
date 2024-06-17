@@ -1,25 +1,30 @@
 import styled, { css, keyframes } from "styled-components";
 
 type Props = {
-  stillOpen?: boolean;
+  showMenu?: boolean;
+  closeMenu?: boolean;
   enableOverflow?: boolean;
 };
 
 const slideIn = keyframes`
   from {
-    transform: translateX(300px);
+    opacity: 0;
+    transform: translateX(400px);
   }
   to {
+    opacity: 1;
     transform: translateX(0);
   }
 `;
 
 const slideOut = keyframes`
   from {
+    opacity: 1;
     transform: translateX(0);
   }
   to {
-    transform: translateX(300px);
+    opacity: 0;
+    transform: translateX(400px);
   }
 `;
 
@@ -48,13 +53,13 @@ export const AsideContent = styled.aside<Props>`
   border-radius: 2px;
   background-color: ${(props) => props.theme.primaryColor};
   ${(props) => {
-    if (props.stillOpen === false) {
+    if (props.closeMenu) {
       return css`
-        animation: ${slideOut} 0.3s ease forwards;
+        animation: ${slideOut} 0.3s ease-out;
       `;
     } else {
       return css`
-        animation: ${slideIn} 0.3s ease forwards;
+        animation: ${slideIn} 0.3s ease-in;
       `;
     }
   }}
@@ -91,13 +96,13 @@ export const ListaProdutosContainer = styled.div<Props>`
   gap: 24px;
   padding: 24px;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 `;
 
 export const ProdutoCompradoContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   width: 350px;
   height: 100px;
@@ -109,10 +114,23 @@ export const ProdutoCompradoContainer = styled.div`
     border-radius: 8px;
     height: 70px;
     width: 70px;
+    margin-left: 8px;
   }
 
   span {
     max-width: 100px;
+  }
+
+  button {
+    background-color: red;
+    height: 100%;
+    border: none;
+    padding: 12px;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
   }
 
   .price {

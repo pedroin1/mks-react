@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import IconShop from "../../icons/iconShop";
-import { ProdutoIO } from "../../types/types";
+import { ProdutoCompleto } from "../../types/types";
 import MenuLateral from "../menuLateral";
 import { HeaderContainer, IconContainer, TitleContainer } from "./style";
 
@@ -34,6 +34,6 @@ export default function HeaderComponent({
 }
 
 type Props = {
-  produtosList: ProdutoIO[];
-  setProdutosList: React.Dispatch<React.SetStateAction<ProdutoIO[]>>;
+  produtosList: ProdutoCompleto[];
+  setProdutosList: React.Dispatch<React.SetStateAction<ProdutoCompleto[]>>;
 };

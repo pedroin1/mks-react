@@ -6,7 +6,7 @@ import HeaderComponent from "./components/header";
 import "./global";
 import PageNotFoundError from "./pages/notFound/page";
 import ProdutosComponent from "./pages/produtos/page";
-import { ProdutoIO } from "./types/types";
+import { ProdutoCompleto } from "./types/types";
 
 const theme = {
   white: "#ffffff",
@@ -17,7 +17,7 @@ const theme = {
 };
 
 export default function App() {
-  const [produtosList, setProdutosList] = useState<ProdutoIO[]>([]);
+  const [produtosList, setProdutosList] = useState<ProdutoCompleto[]>([]);
 
   return (
     <ThemeProvider theme={theme}>
