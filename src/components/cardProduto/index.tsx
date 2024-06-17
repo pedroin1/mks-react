@@ -15,6 +15,7 @@ export default function CardProduto({ produto, setProdutosList }: Props) {
 
       if (indexToAdd !== -1) {
         const updatedList = [...prev];
+
         updatedList[indexToAdd] = {
           ...updatedList[indexToAdd],
           quantidade: updatedList[indexToAdd].quantidade + 1,
