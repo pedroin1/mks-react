@@ -22,7 +22,10 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <HeaderComponent produtosList={produtosList} />
+        <HeaderComponent
+          produtosList={produtosList}
+          setProdutosList={setProdutosList}
+        />
         <Routes>
           <Route
             path="/produtos"

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { ProdutoIO } from "../../types/types";
 import {
   AsideContent,
@@ -12,7 +13,22 @@ export default function MenuLateral({
   showLateralMenu,
   setShowLateralMenu,
   produtosList,
+  setProdutosList,
 }: Props) {
+  const [valorTotalItens, setValorTotalItens] = useState<number>(0);
+
+  const handleRemoveProdutoFromList = (produtoId: number) => {
+    setProdutosList(produtosList.filter((produto) => produto.id !== produtoId));
+  };
+
+  useEffect(() => {
+    let total = produtosList.reduce(
+      (accumulator, current) => accumulator + Number(current.price),
+      0
+    );
+    setValorTotalItens(total);
+  }, [produtosList]);
+
   return (
     <AsideContent stillOpen={showLateralMenu}>
       <TitleAsideContainer>
@@ -27,6 +43,9 @@ export default function MenuLateral({
             <span>{produto.name}</span>
             <span>2</span>
             <div className="price">R$ {produto.price}</div>
+            <button onClick={() => handleRemoveProdutoFromList(produto.id)}>
+              x
+            </button>
           </ProdutoCompradoContainer>
         ))}
       </ListaProdutosContainer>
@@ -34,7 +53,7 @@ export default function MenuLateral({
       <EndBuyContainer>
         <div className="total-wrapper">
           <span>Total:</span>
-          <span>R$ 2500</span>
+          <span>R$ {valorTotalItens}</span>
         </div>
         <ButtonComprarCarrinho>Finalizar compra</ButtonComprarCarrinho>
       </EndBuyContainer>
@@ -46,4 +65,5 @@ type Props = {
   showLateralMenu: boolean;
   setShowLateralMenu: React.Dispatch<React.SetStateAction<boolean>>;
   produtosList: ProdutoIO[];
+  setProdutosList: React.Dispatch<React.SetStateAction<ProdutoIO[]>>;
 };

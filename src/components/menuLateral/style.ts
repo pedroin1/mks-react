@@ -1,9 +1,38 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 type Props = {
   stillOpen?: boolean;
   enableOverflow?: boolean;
 };
+
+const slideIn = keyframes`
+  from {
+    transform: translateX(300px);
+  }
+  to {
+    transform: translateX(0);
+  }
+`;
+
+const slideOut = keyframes`
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(300px);
+  }
+`;
+
+const addItem = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 export const AsideContent = styled.aside<Props>`
   position: fixed;
@@ -17,9 +46,18 @@ export const AsideContent = styled.aside<Props>`
   box-shadow: rgba(0, 0, 0, 0.16) -3px 0px 6px;
   z-index: 1;
   border-radius: 2px;
-
   background-color: ${(props) => props.theme.primaryColor};
-  ${(props) => props.stillOpen === false && `display: none;`}
+  ${(props) => {
+    if (props.stillOpen === false) {
+      return css`
+        animation: ${slideOut} 0.3s ease forwards;
+      `;
+    } else {
+      return css`
+        animation: ${slideIn} 0.3s ease forwards;
+      `;
+    }
+  }}
 `;
 
 export const TitleAsideContainer = styled.div`
@@ -29,19 +67,19 @@ export const TitleAsideContainer = styled.div`
   align-items: center;
 
   span {
-    color: white;
     font-size: 28px;
     font-weight: bold;
+    color: ${(props) => props.theme.white};
   }
 
   button {
-    background-color: black;
-    color: white;
     padding: 8px 12px;
     border-radius: 50%;
     font-size: 20px;
     border: none;
     cursor: pointer;
+    background-color: ${(props) => props.theme.black};
+    color: ${(props) => props.theme.white};
   }
 `;
 
@@ -53,7 +91,8 @@ export const ListaProdutosContainer = styled.div<Props>`
   gap: 24px;
   padding: 24px;
   height: 100%;
-  overflow-y: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;
 
 export const ProdutoCompradoContainer = styled.div`
@@ -63,7 +102,8 @@ export const ProdutoCompradoContainer = styled.div`
   width: 350px;
   height: 100px;
   border-radius: 8px;
-  background-color: white;
+  background-color: ${(props) => props.theme.white};
+  animation: ${addItem} 0.3s ease;
 
   img {
     border-radius: 8px;
@@ -92,18 +132,18 @@ export const EndBuyContainer = styled.div`
   }
 
   span {
-    color: white;
     font-weight: bold;
     font-size: 28px;
+    color: ${(props) => props.theme.white};
   }
 `;
 
 export const ButtonComprarCarrinho = styled.button`
-  background-color: black;
-  color: white;
   padding: 28px;
   font-weight: bold;
   font-size: 28px;
   border: none;
   cursor: pointer;
+  color: ${(props) => props.theme.white};
+  background-color: ${(props) => props.theme.black};
 `;

@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import IconShop from "../../icons/iconShop";
 import { ProdutoIO } from "../../types/types";
 import MenuLateral from "../menuLateral";
 import { HeaderContainer, IconContainer, TitleContainer } from "./style";
 
-export default function HeaderComponent({ produtosList }: Props) {
+export default function HeaderComponent({
+  produtosList,
+  setProdutosList,
+}: Props) {
   const [showLateralMenu, setShowLateralMenu] = useState<boolean>(false);
 
   return (
@@ -23,6 +26,7 @@ export default function HeaderComponent({ produtosList }: Props) {
           showLateralMenu={showLateralMenu}
           setShowLateralMenu={setShowLateralMenu}
           produtosList={produtosList}
+          setProdutosList={setProdutosList}
         />
       )}
     </HeaderContainer>
@@ -31,4 +35,5 @@ export default function HeaderComponent({ produtosList }: Props) {
 
 type Props = {
   produtosList: ProdutoIO[];
+  setProdutosList: React.Dispatch<React.SetStateAction<ProdutoIO[]>>;
 };

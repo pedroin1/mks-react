@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
-  background-color: ${(props) => props.theme.primaryColor};
   width: 100%;
   height: 101px;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+  background-color: ${(props) => props.theme.primaryColor};
 `;
 
 export const TitleContainer = styled.div`
@@ -17,8 +17,8 @@ export const TitleContainer = styled.div`
 
   h1,
   span {
-    color: ${(props) => props.theme.white};
     margin-top: 36px;
+    color: ${(props) => props.theme.white};
   }
 
   h1 {
@@ -37,11 +37,11 @@ export const TitleContainer = styled.div`
 export const IconContainer = styled.div`
   margin-right: 100px;
   padding: 12px 18px;
-  background-color: white;
   border-radius: 4px;
   display: flex;
   gap: 12px;
   cursor: pointer;
+  background-color: ${(props) => props.theme.white};
 
   P {
     font-weight: bold;

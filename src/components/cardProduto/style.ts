@@ -6,8 +6,8 @@ export const ProdutoContainer = styled.div`
   justify-content: space-between;
   width: 300px;
   height: 95%;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 `;
 
 export const InfoProdutoContainer = styled.div`
@@ -33,26 +33,26 @@ export const NameAndPriceContainer = styled.div`
   span:nth-child(2) {
     padding: 8px;
     border-radius: 8px;
-    color: white;
-    background-color: ${(props) => props.theme.secondaryColor};
     font-weight: 700;
     text-align: center;
+    background-color: ${(props) => props.theme.secondaryColor};
+    color: ${(props) => props.theme.white};
   }
 `;
 
 export const ButtonComprarStyled = styled.button`
-  background-color: ${(props) => props.theme.primaryColor};
   border: none;
   outline: none;
   padding: 12px 24px;
   border-bottom-right-radius: 8px;
   border-bottom-left-radius: 8px;
   width: 100%;
-  color: ${(props) => props.theme.white};
   font-weight: bold;
   text-transform: uppercase;
   font-size: 18px;
   cursor: pointer;
+  color: ${(props) => props.theme.white};
+  background-color: ${(props) => props.theme.primaryColor};
 
   &:hover {
     opacity: 0.9;
