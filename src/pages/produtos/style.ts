@@ -15,4 +15,17 @@ export const GridProdutos = styled.div`
   grid-template-columns: repeat(4, 320px);
   grid-template-rows: repeat(2, 400px);
   row-gap: 12px;
+
+  @media (max-width: ${(props) => props.theme.breakpoint1}) {
+    grid-template-columns: repeat(3, 320px);
+    grid-template-rows: repeat(3, 300px);
+  }
+
+  @media (max-width: ${(props) => props.theme.breakpoint2}) {
+    grid-template-columns: repeat(2, 320px);
+  }
+
+  @media (max-width: ${(props) => props.theme.breakpoint3}) {
+    grid-template-columns: repeat(1, 320px);
+  }
 `;

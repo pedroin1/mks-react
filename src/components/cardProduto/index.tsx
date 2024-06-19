@@ -1,4 +1,5 @@
 import { ProdutoCompleto, ProdutoIO } from "../../types/types";
+import { formatNumberToBrCurrency } from "../../util/format-number";
 import {
   ButtonComprarStyled,
   InfoProdutoContainer,
@@ -38,7 +39,7 @@ export default function CardProduto({ produto, setProdutosList }: Props) {
         />
         <NameAndPriceContainer>
           <span>{produto.name}</span>
-          <span>R$ {produto.price}</span>
+          <span>{formatNumberToBrCurrency(produto.price)}</span>
         </NameAndPriceContainer>
         <span>{produto.description}</span>
       </InfoProdutoContainer>

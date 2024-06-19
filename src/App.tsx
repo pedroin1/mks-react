@@ -14,6 +14,10 @@ const theme = {
   primaryColor: "#0f52ba",
   secondaryColor: "#373737",
   thirdColor: "#eeeeee",
+
+  breakpoint1: "1400px",
+  breakpoint2: "940px",
+  breakpoint3: "650px",
 };
 
 export default function App() {
