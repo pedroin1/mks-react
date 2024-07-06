@@ -8,26 +8,14 @@ import {
   ProdutoCompradoContainer,
   TitleAsideContainer,
 } from "./style";
+import { useProductList } from "../../hooks/UseProductList";
 
 export default function MenuLateral({
   showLateralMenu,
   setShowLateralMenu,
-  produtosList,
-  setProdutosList,
 }: Props) {
-  const [valorTotalItens, setValorTotalItens] = useState<number>(0);
-
-  const handleRemoveProdutoFromList = (produtoId: number) => {
-    setProdutosList(produtosList.filter((produto) => produto.id !== produtoId));
-  };
-
-  useEffect(() => {
-    let total = produtosList.reduce(
-      (accumulator, current) => accumulator + Number(current.price),
-      0
-    );
-    setValorTotalItens(total);
-  }, [produtosList]);
+  const { productList, totalValue, handleRemoveProdutoFromList } =
+    useProductList();
 
   return (
     <AsideContent stillOpen={showLateralMenu}>
@@ -36,8 +24,8 @@ export default function MenuLateral({
         <button onClick={() => setShowLateralMenu(false)}>X</button>
       </TitleAsideContainer>
 
-      <ListaProdutosContainer enableOverflow={produtosList.length > 6}>
-        {produtosList.map((produto) => (
+      <ListaProdutosContainer enableOverflow={productList.length > 6}>
+        {productList.map((produto) => (
           <ProdutoCompradoContainer key={produto.id}>
             <img src={produto.photo} alt={`foto_${produto.name}`} />
             <span>{produto.name}</span>
@@ -53,7 +41,7 @@ export default function MenuLateral({
       <EndBuyContainer>
         <div className="total-wrapper">
           <span>Total:</span>
-          <span>R$ {valorTotalItens}</span>
+          <span>R$ {totalValue}</span>
         </div>
         <ButtonComprarCarrinho>Finalizar compra</ButtonComprarCarrinho>
       </EndBuyContainer>
@@ -64,6 +52,4 @@ export default function MenuLateral({
 type Props = {
   showLateralMenu: boolean;
   setShowLateralMenu: React.Dispatch<React.SetStateAction<boolean>>;
-  produtosList: ProdutoIO[];
-  setProdutosList: React.Dispatch<React.SetStateAction<ProdutoIO[]>>;
 };

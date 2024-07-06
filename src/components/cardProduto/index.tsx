@@ -1,3 +1,4 @@
+import { useProductList } from "../../hooks/UseProductList";
 import { ProdutoIO } from "../../types/types";
 import {
   ButtonComprarStyled,
@@ -6,11 +7,8 @@ import {
   ProdutoContainer,
 } from "./style";
 
-export default function CardProduto({ produto, setProdutosList }: Props) {
-  const handleClickAddProdutoOnList = (produto: ProdutoIO) => {
-    setProdutosList((prev) => [...prev, produto]);
-  };
-
+export default function CardProduto({ produto }: Props) {
+  const { handleClickAddProdutoOnList } = useProductList();
   return (
     <ProdutoContainer>
       <InfoProdutoContainer>
