@@ -1,51 +1,82 @@
-import { useEffect, useState } from "react";
-import { ProdutoIO } from "../../types/types";
+import { formatNumberToBrCurrency } from "../../util/format-number";
+import InputQuantidade from "../InputQuantidade";
 import {
-  AsideContent,
-  ButtonComprarCarrinho,
+  AsideContainer,
+  ButtonFinalizarStyled,
+  ButtonRemoveStyled,
   EndBuyContainer,
   ListaProdutosContainer,
-  ProdutoCompradoContainer,
+  PriceLabelStyled,
+  ProdutoCompradoCard,
   TitleAsideContainer,
+  TotalPriceContainer,
 } from "./style";
 import { useProductList } from "../../hooks/UseProductList";
+import { useState } from "react";
 
 export default function MenuLateral({
   showLateralMenu,
   setShowLateralMenu,
 }: Props) {
-  const { productList, totalValue, handleRemoveProdutoFromList } =
-    useProductList();
+  const {
+    productList,
+    totalValue,
+    handleRemoveProdutoFromList,
+    handleClearList,
+  } = useProductList();
+
+  const [closeMenu, setCloseMenu] = useState<boolean>(false);
+
+  const handleClickFinalizarCompra = () => {
+    handleClearList();
+    setShowLateralMenu(false);
+    setTimeout(() => {
+      alert("Compra Finalizada!");
+    }, 300);
+  };
+
+  const handleClickCloseLateralMenu = () => {
+    setCloseMenu(true);
+    setTimeout(() => {
+      setShowLateralMenu(false);
+    }, 200);
+  };
 
   return (
-    <AsideContent stillOpen={showLateralMenu}>
+    <AsideContainer showMenu={showLateralMenu} closeMenu={closeMenu}>
       <TitleAsideContainer>
         <span>Carrinho de compas</span>
-        <button onClick={() => setShowLateralMenu(false)}>X</button>
+        <button onClick={handleClickCloseLateralMenu}>X</button>
       </TitleAsideContainer>
 
       <ListaProdutosContainer enableOverflow={productList.length > 6}>
-        {productList.map((produto) => (
-          <ProdutoCompradoContainer key={produto.id}>
+        {productList.map(({ produto, quantidade }) => (
+          <ProdutoCompradoCard key={produto.id}>
             <img src={produto.photo} alt={`foto_${produto.name}`} />
             <span>{produto.name}</span>
-            <span>2</span>
-            <div className="price">R$ {produto.price}</div>
-            <button onClick={() => handleRemoveProdutoFromList(produto.id)}>
+            <InputQuantidade quantidade={quantidade} />
+            <PriceLabelStyled>
+              {formatNumberToBrCurrency(quantidade * produto.price)}
+            </PriceLabelStyled>
+            <ButtonRemoveStyled
+              onClick={() => handleRemoveProdutoFromList(produto.id)}
+            >
               x
-            </button>
-          </ProdutoCompradoContainer>
+            </ButtonRemoveStyled>
+          </ProdutoCompradoCard>
         ))}
       </ListaProdutosContainer>
 
       <EndBuyContainer>
-        <div className="total-wrapper">
+        <TotalPriceContainer>
           <span>Total:</span>
-          <span>R$ {totalValue}</span>
-        </div>
-        <ButtonComprarCarrinho>Finalizar compra</ButtonComprarCarrinho>
+          <span>{formatNumberToBrCurrency(totalValue)}</span>
+        </TotalPriceContainer>
+        <ButtonFinalizarStyled onClick={handleClickFinalizarCompra}>
+          Finalizar compra
+        </ButtonFinalizarStyled>
       </EndBuyContainer>
-    </AsideContent>
+    </AsideContainer>
   );
 }
 

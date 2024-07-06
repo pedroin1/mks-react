@@ -1,25 +1,30 @@
 import styled, { css, keyframes } from "styled-components";
 
 type Props = {
-  stillOpen?: boolean;
+  showMenu?: boolean;
+  closeMenu?: boolean;
   enableOverflow?: boolean;
 };
 
 const slideIn = keyframes`
   from {
-    transform: translateX(300px);
+    opacity: 0;
+    transform: translateX(400px);
   }
   to {
+    opacity: 1;
     transform: translateX(0);
   }
 `;
 
 const slideOut = keyframes`
   from {
+    opacity: 1;
     transform: translateX(0);
   }
   to {
-    transform: translateX(300px);
+    opacity: 0;
+    transform: translateX(400px);
   }
 `;
 
@@ -34,27 +39,27 @@ const addItem = keyframes`
   }
 `;
 
-export const AsideContent = styled.aside<Props>`
+export const AsideContainer = styled.aside<Props>`
   position: fixed;
   top: 0;
   right: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 400px;
+  width: 500px;
   height: 100vh;
   box-shadow: rgba(0, 0, 0, 0.16) -3px 0px 6px;
   z-index: 1;
   border-radius: 2px;
   background-color: ${(props) => props.theme.primaryColor};
   ${(props) => {
-    if (props.stillOpen === false) {
+    if (props.closeMenu) {
       return css`
-        animation: ${slideOut} 0.3s ease forwards;
+        animation: ${slideOut} 0.3s ease-out forwards;
       `;
     } else {
       return css`
-        animation: ${slideIn} 0.3s ease forwards;
+        animation: ${slideIn} 0.3s ease-in forwards;
       `;
     }
   }}
@@ -91,45 +96,61 @@ export const ListaProdutosContainer = styled.div<Props>`
   gap: 24px;
   padding: 24px;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 `;
 
-export const ProdutoCompradoContainer = styled.div`
+export const ProdutoCompradoCard = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  width: 350px;
+  width: 400px;
   height: 100px;
   border-radius: 8px;
   background-color: ${(props) => props.theme.white};
   animation: ${addItem} 0.3s ease;
 
-  img {
+  > img {
     border-radius: 8px;
     height: 70px;
     width: 70px;
+    margin-left: 8px;
   }
 
-  span {
-    max-width: 100px;
+  > span {
+    width: 70px;
+    text-align: center;
   }
+`;
 
-  .price {
-    font-size: 18px;
-    font-weight: bold;
-  }
+export const PriceLabelStyled = styled.label`
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  min-width: 100px;
+`;
+
+export const ButtonRemoveStyled = styled.button`
+  background-color: #d72009;
+  height: 100%;
+  border: none;
+  padding: 12px;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 `;
 
 export const EndBuyContainer = styled.div`
   display: flex;
   flex-direction: column;
+`;
 
-  .total-wrapper {
-    padding: 24px;
-    display: flex;
-    justify-content: space-between;
-  }
+export const TotalPriceContainer = styled.div`
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
 
   span {
     font-weight: bold;
@@ -138,7 +159,7 @@ export const EndBuyContainer = styled.div`
   }
 `;
 
-export const ButtonComprarCarrinho = styled.button`
+export const ButtonFinalizarStyled = styled.button`
   padding: 28px;
   font-weight: bold;
   font-size: 28px;

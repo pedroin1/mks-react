@@ -4,9 +4,14 @@ export interface ProdutoIO {
   brand: string;
   description: string;
   photo: string;
-  price: string;
+  price: number;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface ProdutoCompleto {
+  produto: ProdutoIO;
+  quantidade: number;
 }
 
 export interface ProdutoResponse {

@@ -1,4 +1,17 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
+
+type Props = {
+  changeList: boolean;
+};
+
+const bounce = keyframes`
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+`;
 
 export const HeaderContainer = styled.header`
   width: 100%;
@@ -34,7 +47,7 @@ export const TitleContainer = styled.div`
   }
 `;
 
-export const IconContainer = styled.div`
+export const IconContainer = styled.div<Props>`
   margin-right: 100px;
   padding: 12px 18px;
   border-radius: 4px;
@@ -42,8 +55,15 @@ export const IconContainer = styled.div`
   gap: 12px;
   cursor: pointer;
   background-color: ${(props) => props.theme.white};
+  ${(props) =>
+    props.changeList &&
+    css`
+      p {
+        animation: ${bounce} 0.3s ease-in-out;
+      }
+    `};
 
-  P {
+  p {
     font-weight: bold;
   }
 `;

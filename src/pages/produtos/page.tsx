@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import CardProduto from "../../components/cardProduto";
-import { ProdutoIO, ProdutoResponse } from "../../types/types";
+import { ProdutoCompleto, ProdutoIO, ProdutoResponse } from "../../types/types";
 import { GridProdutos, MainContainer } from "./style";
 
 export default function ProdutosComponent({ setProdutosList }: Props) {
@@ -44,5 +44,5 @@ export default function ProdutosComponent({ setProdutosList }: Props) {
 }
 
 type Props = {
-  setProdutosList: React.Dispatch<React.SetStateAction<ProdutoIO[]>>;
+  setProdutosList: React.Dispatch<React.SetStateAction<ProdutoCompleto[]>>;
 };

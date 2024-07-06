@@ -1,5 +1,6 @@
 import { useProductList } from "../../hooks/UseProductList";
 import { ProdutoIO } from "../../types/types";
+import { formatNumberToBrCurrency } from "../../util/format-number";
 import {
   ButtonComprarStyled,
   InfoProdutoContainer,
@@ -20,7 +21,7 @@ export default function CardProduto({ produto }: Props) {
         />
         <NameAndPriceContainer>
           <span>{produto.name}</span>
-          <span>{produto.price}</span>
+          <span>{formatNumberToBrCurrency(produto.price)}</span>
         </NameAndPriceContainer>
         <span>{produto.description}</span>
       </InfoProdutoContainer>
@@ -33,5 +34,4 @@ export default function CardProduto({ produto }: Props) {
 
 type Props = {
   produto: ProdutoIO;
-  setProdutosList: React.Dispatch<React.SetStateAction<ProdutoIO[]>>;
 };
