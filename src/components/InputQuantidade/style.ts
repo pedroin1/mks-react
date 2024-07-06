@@ -9,13 +9,14 @@ export const QuantidadeInput = styled.div`
   width: fit-content;
   padding: 4px;
   margin-bottom: 12px;
+  cursor: pointer;
 
   > button {
     background: none;
     border: none;
     font-size: 18px;
-    cursor: pointer;
     outline: none;
+    cursor: pointer;
 
     &:nth-of-type(1) {
       margin-right: 8px;

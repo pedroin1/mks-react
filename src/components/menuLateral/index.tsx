@@ -13,6 +13,7 @@ import {
 } from "./style";
 import { useProductList } from "../../hooks/UseProductList";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function MenuLateral({
   showLateralMenu,
@@ -30,9 +31,7 @@ export default function MenuLateral({
   const handleClickFinalizarCompra = () => {
     handleClearList();
     setShowLateralMenu(false);
-    setTimeout(() => {
-      alert("Compra Finalizada!");
-    }, 300);
+    toast.success("Compra Finalizada !");
   };
 
   const handleClickCloseLateralMenu = () => {
@@ -54,7 +53,7 @@ export default function MenuLateral({
           <ProdutoCompradoCard key={produto.id}>
             <img src={produto.photo} alt={`foto_${produto.name}`} />
             <span>{produto.name}</span>
-            <InputQuantidade quantidade={quantidade} />
+            <InputQuantidade produto={produto} quantidade={quantidade} />
             <PriceLabelStyled>
               {formatNumberToBrCurrency(quantidade * produto.price)}
             </PriceLabelStyled>
