@@ -49,9 +49,10 @@ export const TitleContainer = styled.div`
 
 export const IconContainer = styled.div<Props>`
   margin-right: 100px;
-  padding: 12px 18px;
+  padding: 8px 18px;
   border-radius: 4px;
   display: flex;
+  align-items: center;
   gap: 12px;
   cursor: pointer;
   background-color: ${(props) => props.theme.white};

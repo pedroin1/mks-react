@@ -3,7 +3,7 @@ import CardProduto from "../../components/cardProduto";
 import { ProdutoCompleto, ProdutoIO, ProdutoResponse } from "../../types/types";
 import { GridProdutos, MainContainer } from "./style";
 
-export default function ProdutosComponent({ setProdutosList }: Props) {
+export default function ProdutosComponent() {
   const [produtos, setProdutos] = useState<ProdutoIO[]>([]);
   const [error, setError] = useState<string>("");
 
@@ -31,18 +31,10 @@ export default function ProdutosComponent({ setProdutosList }: Props) {
           <h1>{error}</h1>
         ) : (
           produtos.map((produto) => (
-            <CardProduto
-              key={produto.id}
-              produto={produto}
-              setProdutosList={setProdutosList}
-            />
+            <CardProduto key={produto.id} produto={produto} />
           ))
         )}
       </GridProdutos>
     </MainContainer>
   );
 }
-
-type Props = {
-  setProdutosList: React.Dispatch<React.SetStateAction<ProdutoCompleto[]>>;
-};

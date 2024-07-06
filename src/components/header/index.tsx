@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import IconShop from "../../icons/iconShop";
 import MenuLateral from "../menuLateral";
 import { HeaderContainer, IconContainer, TitleContainer } from "./style";
 import { useProductList } from "../../hooks/UseProductList";
+import { ShoppingBasket, ShoppingCart } from "lucide-react";
 
 export default function HeaderComponent() {
   const { productList } = useProductList();
@@ -28,7 +28,7 @@ export default function HeaderComponent() {
         changeList={changeList}
         onClick={() => setShowLateralMenu(true)}
       >
-        <IconShop />
+        <ShoppingBasket size={26} />
         <p>{productList.length}</p>
       </IconContainer>
 
